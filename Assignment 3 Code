@@ -1,0 +1,92 @@
+#include <iostream>
+
+//Set the max size of the queue
+#define SIZE 10
+
+using namespace std;
+
+//Set the Queue class 
+class Queue {
+private:
+int myqueue[SIZE], front, rear;
+     
+public:
+Queue(){
+front = -1;
+rear = -1;
+    }
+
+//Tests to make sure the queue if full and has the right amount of elements
+boolisFull(){
+if(front == 0 && rear == SIZE - 1){
+return true;
+        }
+return false;
+    }
+//Tells program if the boolean is empty. 
+boolisEmpty(){
+if(front == -1) return true;
+else return false;
+    }
+//Tells the user when they have reached a full capacity. 
+void enQueue(int value){
+if(isFull()){
+cout << endl<< "Querue is full";
+        } else {
+if(front == -1) front = 0;
+rear++;
+myqueue[rear] = value;
+cout << value << " ";
+        }
+    }
+
+//Tells the user when they deequeue to much and it becomes empty.
+int deQueue(){
+int value;
+if(isEmpty()){
+cout << "Queue is empty." << endl; return(-1); } else { value = myqueue[front]; if(front >= rear){      //only one element in queue
+front = -1;
+rear = -1;
+            } 
+else {
+front++;
+            }
+
+     
+//Display elements of the queue
+void displayQueue()
+    { 
+int i;
+if(isEmpty()) {
+cout << endl << "Queue is Empty" << endl;
+        }
+else {
+cout << endl << "Front = " << front;
+cout << endl << "Queue elements : ";
+for(i=front; i<=rear; i++)
+cout << myqueue[i] << "\t";
+cout << endl << "Rear = " << rear << endl;
+        }
+    }
+};
+int main()
+{
+    Queue myqueue;
+     
+myqueue.deQueue();      //deQueue 
+    
+//Queue list created
+cout<<"Queue created:"<<endl; myqueue.enQueue(5); myqueue.enQueue(8); myqueue.enQueue(13); myqueue.enQueue(22); myqueue.enQueue(23); myqueue.enQueue(32); myqueue.enQueue(45); myqueue.enQueue(49); myqueue.enQueue(59); myqueue.enQueue(72);//enqueue 60 => queue is full 
+myqueue.enQueue(60);
+
+//display queue    
+myqueue.displayQueue();
+
+//Dequeue function
+myqueue.deQueue();
+     
+//Queue after dequeue has been preformed.
+myqueue.displayQueue();
+     
+return 0;
+}
